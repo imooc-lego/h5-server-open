@@ -1,0 +1,10 @@
+version: '3'
+services:
+    h5-server:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: h5-server # 依赖于当前 Dockerfile 创建镜像
+        container_name: h5-server
+        ports:
+            - 8082:3001 # 宿主机通过 8082 访问

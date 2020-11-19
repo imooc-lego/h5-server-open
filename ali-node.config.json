@@ -1,0 +1,6 @@
+{
+    "appid": "123",
+    "secret": "xxx",
+    "logdir": "/tmp/h5-server",
+    "packages": "~/imooc-lego/h5-server/package.json"
+}

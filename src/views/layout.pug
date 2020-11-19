@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title= title
+    meta(name='description', content=desc)
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(rel='stylesheet', href='//cdn.bootcdn.net/ajax/libs/minireset.css/0.0.2/minireset.min.css')
+
+    //- 动态引入 css ，参考 src/middlewares/renderWithAssets.js
+    each f in ASSETS_CSS_FILES
+      link(rel='stylesheet', href=f)
+
+    //- 微信 jssdk
+    if wxJsSdkMainConf
+      script(src='//res.wx.qq.com/open/js/jweixin-1.6.0.js')
+      script window.WX_JSSDK_MAIN_CONF = !{wxJsSdkMainConf}; window.MAIN_SHARE_CONF = !{mainShareConf};
+
+    //- pageType ，如 publish preview 404 error
+    if pageType
+      script window.PAGE_TYPE = '#{pageType}';
+    if eventInfoList
+      script window.EVENT_INFO_LIST = !{eventInfoList};
+
+    //- 百度统计
+    script
+      | var _hmt = _hmt || [];
+      | (function() {
+      |   var hm = document.createElement("script");
+      |   hm.src = "https://hm.baidu.com/hm.js?3061e25d564efbbacc19d607b9e5f292";
+      |   var s = document.getElementsByTagName("script")[0]; 
+      |   s.parentNode.insertBefore(hm, s);
+      | })();
+
+  body(style=bodyStyle)
+    block content
+
+    //- 动态引入 js，参考 src/middlewares/renderWithAssets.js
+    each f in ASSETS_JS_FILES
+      script(src=f)

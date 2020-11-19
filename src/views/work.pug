@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  //- 渲染 html ，不转译
+  div !{content}
+
+  //- 预览时的提示，重要！
+  if pageType == 'preview'
+    div(style="position: absolute; top:0; width: 100%; height: 40px; line-height: 40px; text-align: center; background: red; color: #f1f1f1; font-weight: bold;")
+      | 仅供预览，请发布作品后，再正式使用
+    script
+      | document.body.setAttribute('style', (document.body.getAttribute('style') || '') + ';margin-top:40px;')
