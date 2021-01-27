@@ -13,7 +13,8 @@
         "dev": "npm run build-assets-dev && cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
         "prd-dev": "npm run build-assets-prd-dev && npm run upload-assets-prd-dev && cross-env NODE_ENV=prd_dev pm2 start bin/pm2-prd-dev.config.js",
         "prd": "npm run build-assets-prd && npm run upload-assets-prd && cross-env NODE_ENV=production NODE_LOG_DIR=/tmp/h5-server ENABLE_NODE_LOG=YES pm2 start bin/pm2-prd.config.js",
-        "test": "cross-env NODE_ENV=test jest --runInBand  --passWithNoTests --colors",
+        "test:local": "cross-env NODE_ENV=test_local jest --runInBand  --passWithNoTests --colors --forceExit",
+        "test:remote": "cross-env NODE_ENV=test_remote jest --runInBand  --passWithNoTests --colors --forceExit",
         "lint": "eslint \"src/**/*.{js,ts}\"",
         "lint-fix": "eslint --fix \"src/**/*.{js,ts}\"",
         "release": "release-it",
@@ -55,6 +56,7 @@
         "prettier": "^2.1.1",
         "release-it": "^14.2.1",
         "style-loader": "^1.2.1",
+        "supertest": "^6.1.3",
         "terser-webpack-plugin": "^4.2.2",
         "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
@@ -88,5 +90,17 @@
         "sequelize": "^6.3.5",
         "simple-git": "^2.20.1",
         "vue": "^3.0.0"
-    }
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "npm run lint --fix",
+            "npm run test:local"
+        ]
+    },
 }

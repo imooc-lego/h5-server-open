@@ -26,7 +26,7 @@ const { appId } = wxConf
  * 获取微信 access token
  */
 async function getAccessToken() {
-    if (isDev) return '' // dev 环境无法获取 access token ，IP 白名单限制
+    if (isDev || isTest) return '' // dev 环境无法获取 access token ，IP 白名单限制
 
     // 尝试从缓存获取
     const token = await wxAccessTokenGetCache()
@@ -56,7 +56,7 @@ async function getAccessToken() {
  * 获取 ticket
  */
 async function getTicket() {
-    if (isDev) return '' // dev 环境无法获取 ticket ，IP 白名单限制
+    if (isDev || isTest) return '' // dev 环境无法获取 ticket ，IP 白名单限制
 
     // 尝试从缓存中获取
     const ticketFromCache = await wxTicketGetCache()

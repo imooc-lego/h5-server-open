@@ -23,7 +23,7 @@ jobs:
               run: |
                   npm i
                   npm run lint
-                  npm run test
+                  npm run test:remote
             - name: set ssh key # 临时设置 ssh key
               run: |
                   mkdir -p ~/.ssh/

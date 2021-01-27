@@ -21,16 +21,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2
-            - name: Use Node.js
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 14
-            - name: lint and test # 测试
-              run: |
-                  npm i
-                  npm run lint
-                  npm run test
             - name: set ssh key # 临时设置 ssh key
               run: |
                   mkdir -p ~/.ssh/
